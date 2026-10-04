@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col-sm-8 col-md-5">
+        <h2 class="mb-4 text-center">Sell Shares</h2>
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <form action="/sell" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" for="symbol">Stock</label>
+                        <select class="form-select" id="symbol" name="symbol">
+                            <option value="">Select a stock...</option>
+                            {% for h in holdings %}
+                            <option value="{{ h.symbol }}"
+                                {% if request.args.get('symbol') == h.symbol %}selected{% endif %}>
+                                {{ h.symbol }} ({{ h.total_shares }} shares)
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="shares">Shares to Sell</label>
+                        <input class="form-control" id="shares" min="1" name="shares"
+                            placeholder="1" step="1" type="number">
+                    </div>
+                    <button class="btn btn-danger w-100" type="submit">Sell</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col-sm-8 col-md-5">
+        <h2 class="mb-4 text-center">Get a Quote</h2>
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <form action="/quote" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" for="symbol">Stock Symbol</label>
+                        <input autocomplete="off" autofocus class="form-control" id="symbol"
+                            name="symbol" placeholder="e.g. NFLX" type="text">
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Get Quote</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

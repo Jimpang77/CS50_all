@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<h2 class="mb-4">My Portfolio</h2>
+
+{% if portfolio %}
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">Value</th>
+                <th class="text-center">Trade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in portfolio %}
+            <tr>
+                <td><strong>{{ stock.symbol }}</strong></td>
+                <td class="text-muted">{{ stock.name }}</td>
+                <td class="text-end">{{ stock.shares }}</td>
+                <td class="text-end">{{ stock.price | usd }}</td>
+                <td class="text-end">{{ stock.value | usd }}</td>
+                <td class="text-center">
+                    <a href="/buy?symbol={{ stock.symbol }}" class="btn btn-sm btn-outline-success me-1">Buy</a>
+                    <a href="/sell?symbol={{ stock.symbol }}" class="btn btn-sm btn-outline-danger">Sell</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="table-secondary fw-semibold">
+            <tr>
+                <td colspan="4" class="text-end">Cash</td>
+                <td class="text-end">{{ cash | usd }}</td>
+                <td></td>
+            </tr>
+            <tr class="table-dark">
+                <td colspan="4" class="text-end">Grand Total</td>
+                <td class="text-end">{{ grand_total | usd }}</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% else %}
+<div class="card text-center py-5 text-muted">
+    <p class="mb-2">You don't own any stocks yet.</p>
+    <a href="/buy" class="btn btn-primary w-auto mx-auto">Buy your first stock</a>
+</div>
+{% endif %}
+
+<div class="row mt-3">
+    <div class="col-sm-auto">
+        <div class="card text-center px-4 py-3">
+            <div class="text-muted small">Cash balance</div>
+            <div class="fs-4 fw-bold text-success">{{ cash | usd }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

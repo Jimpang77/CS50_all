@@ -1,0 +1,74 @@
+============================================================
+  specification.txt — CS50x Homepage
+============================================================
+
+HTML TAGS USED (10 distinct, excluding html/head/body/title)
+------------------------------------------------------------
+1.  <nav>       — Site-wide navigation bar on every page
+2.  <header>    — Hero section on the homepage (index.html)
+3.  <main>      — Primary content area on about/hobbies/contact pages
+4.  <section>   — Thematic content sections (highlights, quote band, skills)
+5.  <footer>    — Site-wide footer with copyright and links
+6.  <ul> / <li> — Navbar links, timeline entries, hobby accordion
+7.  <form>      — Contact form on contact.html
+8.  <input>     — Name and email fields in the contact form
+9.  <textarea>  — Message field in the contact form
+10. <select>    — Subject dropdown in the contact form
+11. <button>    — "New Quote" button on homepage; "Send Message" submit button
+12. <blockquote>— Rotating quote block on the homepage
+13. <em>        — Italic styling for decorative headings and the quote text
+14. <strong>    — Bold labels inside hobby and timeline content
+15. <hr>        — Decorative dividers on the about and contact pages
+
+(Several beyond the required 10 are included for thoroughness.)
+
+
+CSS SELECTORS USED (5 distinct types)
+--------------------------------------
+1.  Tag selector          — body, nav, footer, label, hr, etc.
+2.  Class selector        — .navbar, .hero, .highlight-card, .skill-fill, etc.
+3.  ID selector           — #rotating-quote, #new-quote-btn, #contact-form
+4.  Pseudo-class          — :hover (on nav links, cards, buttons, form controls)
+5.  Pseudo-element        — ::before (timeline diamond markers)
+6.  Descendant combinator — footer nav a, .timeline li strong, .hero-name em
+
+
+CSS PROPERTIES USED (5 distinct, many more present)
+-----------------------------------------------------
+1.  font-family    — Sets display (Playfair Display) vs. mono (DM Mono) fonts
+2.  transition     — Smooth colour/opacity/width changes on hover/interaction
+3.  border         — Card and form field borders using CSS variable --border
+4.  background     — Dark surface colours and radial gradient hero overlay
+5.  letter-spacing — Uppercase labels and navigation items use wide tracking
+6.  width / transition — Skill bars animate from 0% to their data-width value
+7.  position / ::before — Absolute-positioned diamond markers on the timeline
+
+
+JAVASCRIPT FEATURES
+-------------------
+1. Rotating Quote (index.html)
+   A "New Quote" button cycles through an array of five programming quotes,
+   fading the old quote out, swapping the text, then fading back in.
+
+2. Animated Skill Bars (about.html)
+   On page load, each .skill-fill element's width is animated from 0% to the
+   percentage stored in its data-width attribute, using a CSS transition
+   triggered by JavaScript setting the inline style.
+
+3. Contact Form Validation & Simulated Submission (contact.html)
+   The form's submit event is intercepted; if required fields are empty an
+   error message is shown, otherwise a 1-second "sending" delay simulates
+   network activity before a personalised success message is displayed and
+   the form is reset.
+
+
+BOOTSTRAP FEATURES
+------------------
+1. Responsive Navbar  — .navbar, .navbar-expand-lg, .navbar-collapse,
+                         data-toggle="collapse" for the mobile hamburger menu.
+2. Grid system        — .container, .row, .col-md-4 / .col-md-7 for the
+                         highlights section and about page layout.
+3. Bootstrap Accordion — data-parent, data-toggle="collapse" drive the
+                         hobby accordion on hobbies.html without extra JS.
+4. Alert classes      — .alert, .alert-warning used for form feedback on
+                         contact.html.

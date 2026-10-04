@@ -1,0 +1,679 @@
+/* ============================================================
+   styles.css — Alex Rivera Homepage
+   All colours and fonts are defined as CSS variables at the top
+   so you can retheme the whole site by changing just this block.
+   ============================================================ */
+
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES (variables)
+   Referenced throughout the file as var(--name).
+   ============================================================ */
+:root {
+    --bg:           #0e0d0b;              /* page background — near-black warm dark */
+    --surface:      #1a1814;              /* slightly lighter surface for cards/footer */
+    --border:       rgba(255,255,255,0.12); /* subtle white border used everywhere */
+    --gold:         #c9a84c;              /* accent colour for highlights and headings */
+    --cream:        #f0ece3;              /* primary text colour */
+    --muted:        #8a8070;              /* secondary/subdued text */
+    --font-display: 'Playfair Display', Georgia, serif; /* used for headings */
+    --font-mono:    'DM Mono', 'Courier New', monospace; /* used for body / labels */
+    --transition:   0.3s ease;           /* reusable timing for hover animations */
+}
+
+
+/* ============================================================
+   RESET & BASE
+   Overrides browser default margin/padding and sets global defaults.
+   ============================================================ */
+*, *::before, *::after {
+    box-sizing: border-box; /* include padding/border in element's total width */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--cream);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    /* flex column so the footer sticks to the bottom on short pages */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ============================================================
+   NAVBAR
+   Sticky bar that stays at the top when scrolling.
+   backdrop-filter blurs the page content behind the translucent bar.
+   ============================================================ */
+.navbar {
+    background: rgba(14,13,11,0.92); /* dark semi-transparent background */
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 100; /* keep it above all other content */
+}
+
+/* Brand / logo link */
+.navbar-brand {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold) !important; /* !important overrides Bootstrap's default link colour */
+    letter-spacing: 0.05em;
+}
+
+/* Navigation links */
+.nav-link {
+    color: var(--muted) !important;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color var(--transition);
+    padding: 0.5rem 1rem !important;
+}
+
+/* Hover and active state both turn the link white */
+.nav-link:hover,
+.nav-link.active {
+    color: var(--cream) !important;
+}
+
+/* Mobile hamburger button border */
+.navbar-toggler {
+    border-color: var(--border);
+}
+
+/* Custom hamburger icon using an inline SVG data URI */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(240,236,227,0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
+/* ============================================================
+   HERO (index.html only)
+   Full-viewport-height section with a subtle radial gold glow.
+   clamp() makes the heading scale smoothly between screen sizes.
+   ============================================================ */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 6vw;
+    position: relative;  /* needed so ::before can be positioned absolutely inside */
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Decorative radial glow behind the right side of the hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0; /* shorthand for top/right/bottom/left: 0 */
+    background: radial-gradient(ellipse at 70% 40%, rgba(201,168,76,0.07) 0%, transparent 65%);
+    pointer-events: none; /* so it doesn't block clicks */
+}
+
+/* Small "Hello, I'm" label above the name */
+.hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+}
+
+/* Large name heading — scales with viewport width via clamp() */
+.hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 9vw, 7rem); /* min 3.5rem, preferred 9vw, max 7rem */
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+}
+
+/* The <em> inside .hero-name italicises the last name in gold */
+.hero-name em {
+    font-style: italic;
+    color: var(--gold);
+}
+
+/* Tagline below the name */
+.hero-sub {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+}
+
+/* Decorative binary-number column on the right — purely visual */
+.hero-decor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    color: rgba(255,255,255,0.05); /* almost invisible — just texture */
+    user-select: none;
+    font-weight: 300;
+}
+
+
+/* ============================================================
+   BUTTONS
+   We override Bootstrap's .btn-outline-light to match our theme.
+   border-radius: 0 gives sharp square corners instead of rounded.
+   ============================================================ */
+.btn-outline-light {
+    border-color: var(--border);
+    color: var(--cream);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.6rem;
+    border-radius: 0;
+    transition: background var(--transition), color var(--transition);
+}
+
+/* On hover the button fills with gold */
+.btn-outline-light:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg); /* dark text on gold background for contrast */
+}
+
+
+/* ============================================================
+   HIGHLIGHT CARDS (index.html)
+   Three equal cards that link to each of the inner pages.
+   The border glows gold on hover.
+   ============================================================ */
+.highlights {
+    padding: 4rem 0;
+}
+
+.highlight-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.highlight-card:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04); /* very faint gold tint */
+}
+
+/* Unicode shape icon at the top of each card */
+.highlight-icon {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.highlight-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+}
+
+/* "Learn more" link — gold underline style */
+.highlight-card a {
+    color: var(--gold);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 1px;
+    transition: opacity var(--transition);
+}
+
+.highlight-card a:hover {
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+   QUOTE BAND (index.html)
+   A dark stripe across the page containing the rotating quote.
+   ============================================================ */
+.quote-band {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 6vw;
+    text-align: center;
+}
+
+/* The quote text itself — italic serif, scales with viewport */
+#rotating-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--cream);
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    transition: opacity 0.3s ease; /* JavaScript toggles opacity to create the fade */
+}
+
+/* "New Quote" button — minimal ghost style */
+#new-quote-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.4rem;
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+#new-quote-btn:hover {
+    color: var(--cream);
+    border-color: var(--cream);
+}
+
+
+/* ============================================================
+   PAGE CONTENT (about / hobbies / contact)
+   Shared layout wrapper for the three inner pages.
+   flex: 1 makes the main area grow to fill space above the footer.
+   ============================================================ */
+.page-content {
+    flex: 1;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+}
+
+/* Page title block with a gold left border accent */
+.page-header {
+    margin-bottom: 3.5rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+}
+
+.page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* The <em> inside page titles is italicised and gold */
+.page-header h1 em {
+    color: var(--gold);
+    font-style: italic;
+}
+
+/* Small uppercase subtitle under the page title */
+.page-sub {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+}
+
+
+/* ============================================================
+   AVATAR (about.html)
+   Square placeholder with a gold border. Replace with an <img>
+   if you add a real photo.
+   ============================================================ */
+.avatar-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.avatar-placeholder {
+    width: 220px;
+    height: 220px;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   SKILL BARS (about.html)
+   Each bar starts at width: 0. JavaScript sets the final width
+   via inline style, and the CSS transition animates it smoothly.
+   ============================================================ */
+.section-title {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+}
+
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+}
+
+/* One row: label + bar */
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Fixed-width label on the left */
+.skill-name {
+    width: 110px;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0; /* don't let it shrink on narrow screens */
+}
+
+/* Grey track behind the fill */
+.skill-bar {
+    flex: 1;       /* take all remaining horizontal space */
+    height: 3px;
+    background: var(--border);
+    position: relative;
+}
+
+/* Gold fill — starts at 0, animated to data-width% by JavaScript */
+.skill-fill {
+    height: 100%;
+    background: var(--gold);
+    width: 0;      /* JavaScript will override this with the target width */
+    transition: width 1s cubic-bezier(0.25, 1, 0.5, 1); /* smooth ease-out animation */
+}
+
+
+/* ============================================================
+   TIMELINE (about.html)
+   An unstyled <ul> styled as a vertical timeline.
+   The ::before pseudo-element draws the diamond marker.
+   ============================================================ */
+.timeline {
+    list-style: none;
+    padding: 0;
+    border-left: 1px solid var(--border); /* the vertical line */
+    padding-left: 2rem;
+}
+
+.timeline li {
+    position: relative; /* so ::before can be placed relative to it */
+    margin-bottom: 2rem;
+}
+
+/* Diamond bullet using a rotated square */
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;    /* pull it across to sit on the border-left line */
+    top: 0.4rem;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--gold);
+    background: var(--bg); /* fill with page background so the line shows through */
+    transform: rotate(45deg); /* a square rotated 45° looks like a diamond */
+}
+
+/* Entry title */
+.timeline li strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    margin-bottom: 0.1rem;
+}
+
+/* Date/year label in gold */
+.timeline li span {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+
+/* ============================================================
+   HOBBY ACCORDION CARDS (hobbies.html)
+   Bootstrap's collapse component handles the show/hide.
+   We style the card container and toggle button here.
+   ============================================================ */
+.hobby-card {
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+    transition: border-color var(--transition);
+}
+
+.hobby-card:hover {
+    border-color: var(--gold);
+}
+
+.hobby-header {
+    padding: 0;
+}
+
+/* The clickable toggle button for each accordion panel */
+.hobby-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: background var(--transition);
+}
+
+.hobby-toggle:hover {
+    background: rgba(201,168,76,0.05);
+}
+
+/* "01", "02" etc. number before the hobby name */
+.hobby-num {
+    color: var(--gold);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* The body text shown when the panel is expanded */
+.hobby-body {
+    padding: 0 1.5rem 1.5rem 3.5rem; /* left padding aligns under the hobby name */
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.hobby-body p {
+    margin-bottom: 0.6rem;
+}
+
+/* Bold labels inside hobby descriptions appear white */
+.hobby-body strong {
+    color: var(--cream);
+}
+
+
+/* ============================================================
+   CONTACT FORM (contact.html)
+   Overrides Bootstrap's .form-control defaults to fit the dark theme.
+   !important is required to beat Bootstrap's more specific selectors.
+   ============================================================ */
+
+/* <label> text above each field */
+label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+}
+
+/* All form inputs, selects, and textareas */
+.form-control {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 0 !important;   /* sharp corners to match the overall aesthetic */
+    color: var(--cream) !important;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    transition: border-color var(--transition) !important;
+}
+
+/* Gold border when the field is focused */
+.form-control:focus {
+    border-color: var(--gold) !important;
+    box-shadow: none !important; /* remove Bootstrap's blue glow */
+    outline: none;
+}
+
+/* Greyed-out hint text inside empty fields */
+.form-control::placeholder {
+    color: var(--muted) !important;
+}
+
+
+/* ============================================================
+   CONTACT SOCIAL LINKS (contact.html)
+   Three icon+link pairs displayed in a centred row.
+   ============================================================ */
+.contact-link-item {
+    text-align: center;
+    padding: 1.5rem 2rem;
+}
+
+/* Gold icon above each link */
+.contact-icon {
+    display: block;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-link-item a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color var(--transition);
+}
+
+.contact-link-item a:hover {
+    color: var(--cream);
+}
+
+
+/* ============================================================
+   DIVIDER
+   A thin horizontal rule using the border colour variable.
+   ============================================================ */
+.divider {
+    border-color: var(--border);
+    margin: 3.5rem 0;
+}
+
+
+/* ============================================================
+   FOOTER
+   Stays at the bottom of every page.
+   Space-between puts the copyright on the left and links on the right.
+   ============================================================ */
+footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 2rem 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;    /* wrap to two lines on narrow screens */
+    gap: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+footer nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    transition: color var(--transition);
+}
+
+footer nav a:hover {
+    color: var(--cream);
+}
+
+
+/* ============================================================
+   RESPONSIVE OVERRIDES
+   Applied only when the viewport is 768px wide or narrower (mobile).
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Stack hero content vertically and reduce padding */
+    .hero {
+        flex-direction: column;
+        padding: 3rem 1.5rem;
+        min-height: 70vh;
+    }
+
+    /* Hide the decorative binary digits on mobile to save space */
+    .hero-decor {
+        display: none;
+    }
+
+    /* Stack footer items vertically and centre them */
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer nav a:first-child {
+        margin-left: 0; /* remove left margin on the first link when stacked */
+    }
+
+    footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    /* Shrink the avatar placeholder on small screens */
+    .avatar-placeholder {
+        width: 160px;
+        height: 160px;
+        font-size: 2.5rem;
+    }
+}

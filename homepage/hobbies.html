@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobbies — Andrew Hong</title>
+
+    <!-- Bootstrap 4.5.3 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- jQuery slim + Bootstrap JS — required for the accordion collapse behaviour -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Our custom stylesheet -->
+    <link href="styles.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===================== NAVBAR =====================
+         "active" class is on Hobbies to show the current page. -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">AH</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <!-- "active" on Hobbies because this is the Hobbies page -->
+                <li class="nav-item"><a class="nav-link active" href="hobbies.html">Hobbies</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="container page-content">
+
+        <div class="page-header">
+            <h1>My <em>Hobbies</em></h1>
+            <p class="page-sub">Things that bring me joy outside of code.</p>
+        </div>
+
+        <!-- ===================== BOOTSTRAP ACCORDION =====================
+             data-parent="#hobbiesAccordion" ensures only one panel is open at
+             a time — clicking a new header automatically closes the previous one.
+             Each panel needs:
+               - A button with data-toggle="collapse" and data-target="#panelId"
+               - A sibling div with id="panelId" and class="collapse" (or "collapse show" to start open) -->
+        <div id="hobbiesAccordion">
+
+            <!-- Hobby 1 — starts open ("collapse show") -->
+            <div class="hobby-card">
+                <div class="hobby-header" id="h1">
+                    <button class="hobby-toggle" data-toggle="collapse" data-target="#c1" aria-expanded="true">
+                        <span class="hobby-num">01</span> Running
+                    </button>
+                </div>
+                <!-- "show" class makes this panel visible on page load -->
+                <div id="c1" class="collapse show" data-parent="#hobbiesAccordion">
+                    <div class="hobby-body">
+                        <p>Running clears my head and keeps me grounded. Whether it's an easy morning jog or pushing through a longer distance, there's nothing quite like finishing a run and feeling like you earned the rest of your day.</p>
+                        <p><strong>Current goal:</strong>An one hundred meter sprint under 12 seconds.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hobby 2 — starts collapsed -->
+            <div class="hobby-card">
+                <div class="hobby-header" id="h2">
+                    <button class="hobby-toggle collapsed" data-toggle="collapse" data-target="#c2">
+                        <span class="hobby-num">02</span> Cooking
+                    </button>
+                </div>
+                <div id="c2" class="collapse" data-parent="#hobbiesAccordion">
+                    <div class="hobby-body">
+                        <p>Cooking is just programming with ingredients: follow the algorithm, adjust parameters, and debug when something smells wrong. I like experimenting with different cuisines and rarely make the same dish twice.</p>
+                        <p><strong>Current obsession:</strong> Homemade ramen broth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hobby 3 — starts collapsed -->
+            <div class="hobby-card">
+                <div class="hobby-header" id="h3">
+                    <button class="hobby-toggle collapsed" data-toggle="collapse" data-target="#c3">
+                        <span class="hobby-num">03</span> Coding
+                    </button>
+                </div>
+                <div id="c3" class="collapse" data-parent="#hobbiesAccordion">
+                    <div class="hobby-body">
+                        <p>Beyond schoolwork, I love building things just to see if I can. Small scripts, mini-games, tools that solve everyday annoyances — coding as a hobby feels completely different from coding as homework.</p>
+                        <p><strong>Latest side project:</strong> None at the moment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hobby 4 — starts collapsed -->
+            <div class="hobby-card">
+                <div class="hobby-header" id="h4">
+                    <button class="hobby-toggle collapsed" data-toggle="collapse" data-target="#c4">
+                        <span class="hobby-num">04</span> Fishing
+                    </button>
+                </div>
+                <div id="c4" class="collapse" data-parent="#hobbiesAccordion">
+                    <div class="hobby-body">
+                        <p>Fishing is the perfect excuse to sit quietly by the water and do absolutely nothing productive. It's a great reset after a long week of staring at screens.</p>
+                        <p><strong>Favourite spot:</strong> Local lake on early weekend mornings.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hobby 5 — starts collapsed -->
+            <div class="hobby-card">
+                <div class="hobby-header" id="h5">
+                    <button class="hobby-toggle collapsed" data-toggle="collapse" data-target="#c5">
+                        <span class="hobby-num">05</span> Gaming
+                    </button>
+                </div>
+                <div id="c5" class="collapse" data-parent="#hobbiesAccordion">
+                    <div class="hobby-body">
+                        <p>I've been gaming since I was a kid and it's stuck. I enjoy strategy games, open-world RPGs, and the occasional competitive shooter. Gaming is also what first got me curious about how software actually works under the hood.</p>
+                        <p><strong>Currently playing:</strong> Whatever I can squeeze in between homework.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end #hobbiesAccordion -->
+
+        <!-- Call-to-action linking to the Contact page -->
+        <div class="text-center mt-5">
+            <a href="contact.html" class="btn btn-outline-light">Want to chat about any of these? →</a>
+        </div>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <p>&copy; 2025 Andrew Hong &mdash; Built with HTML, CSS &amp; JS</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="hobbies.html">Hobbies</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <!-- No extra JavaScript needed on this page —
+         Bootstrap's bundled JS handles the accordion collapse behaviour. -->
+
+</body>
+</html>

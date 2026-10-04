@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Andrew Hong</title>
+
+    <!-- Bootstrap 4.5.3 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- jQuery slim + Bootstrap JS — needed for the mobile hamburger menu -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Our custom stylesheet -->
+    <link href="styles.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===================== NAVBAR =====================
+         "active" class is on Contact to show the current page. -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">AH</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="hobbies.html">Hobbies</a></li>
+                <!-- "active" on Contact because this is the Contact page -->
+                <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="container page-content">
+
+        <div class="page-header">
+            <h1>Get in <em>Touch</em></h1>
+            <p class="page-sub">I'd love to hear from you.</p>
+        </div>
+
+        <!-- Centre the form in a 7-column-wide column on medium+ screens -->
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+
+                <!-- ===================== CONTACT FORM =====================
+                     novalidate disables the browser's built-in validation bubbles
+                     so our custom JavaScript validation runs instead.
+                     The form does NOT have an action= attribute because we handle
+                     submission entirely in JavaScript (simulated — no server needed). -->
+                <form id="contact-form" novalidate>
+
+                    <!-- Name field — type="text" accepts any string -->
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Jane Smith" required>
+                    </div>
+
+                    <!-- Email field — type="email" gives mobile keyboards an @ key -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="jane@example.com" required>
+                    </div>
+
+                    <!-- Subject dropdown — <select> with several topic options -->
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select class="form-control" id="subject">
+                            <option value="">— Choose a topic —</option>
+                            <option>Just saying hi</option>
+                            <option>Collaboration</option>
+                            <option>CS50 / studying</option>
+                            <option>Astrophotography</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Message textarea — rows="5" sets the initial visible height -->
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Write your message here…" required></textarea>
+                    </div>
+
+                    <!-- Submit button — full-width via Bootstrap's w-100 utility -->
+                    <button type="submit" class="btn btn-outline-light w-100" id="submit-btn">Send Message</button>
+
+                    <!-- Feedback area — hidden by default; shown by JavaScript after validation -->
+                    <div id="form-feedback" class="mt-3" style="display:none;"></div>
+
+                </form>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ---- SOCIAL / CONTACT LINKS ---- -->
+        <div class="contact-links text-center">
+            <h2 class="section-title">Find Me Online</h2>
+            <div class="row justify-content-center">
+                <!-- Each link has a decorative icon span + an anchor tag -->
+                <div class="col-auto contact-link-item">
+                    <span class="contact-icon">&#9670;</span>
+                    <a href="https://github.com/Jimpang77" target="_blank">GitHub</a>
+                </div>
+                <div class="col-auto contact-link-item">
+                    <span class="contact-icon">&#9711;</span>
+                    <!-- mailto: opens the user's default email client -->
+                    <a href="mailto:drewkaboom123@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <p>&copy; 2025 Andrew Hong &mdash; Built with HTML, CSS &amp; JS</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="hobbies.html">Hobbies</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <!-- ===================== JAVASCRIPT: FORM VALIDATION & SUBMISSION =====================
+         Intercepts the form's submit event so we can validate fields and
+         simulate sending without a real back-end server.
+
+         Flow:
+           1. Prevent default browser submission with e.preventDefault().
+           2. Read and trim the three required fields.
+           3. If any are empty, show a warning and stop.
+           4. Otherwise, disable the button and show a "Sending…" state.
+           5. After 1 second (simulating a network request), show a success
+              message, re-label the button, and reset the form. -->
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            // Stop the browser from refreshing / navigating away
+            e.preventDefault();
+
+            // Read field values and remove surrounding whitespace
+            const name    = document.getElementById('name').value.trim();
+            const email   = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            const feedback = document.getElementById('form-feedback');
+
+            // Validation: all three required fields must be non-empty
+            if (!name || !email || !message) {
+                feedback.style.display = 'block';
+                feedback.className     = 'alert alert-warning'; // Bootstrap warning style
+                feedback.textContent   = 'Please fill in your name, email, and message.';
+                return; // stop here — don't simulate sending
+            }
+
+            // Disable the button and show a loading label so the user knows something is happening
+            const btn  = document.getElementById('submit-btn');
+            btn.disabled    = true;
+            btn.textContent = 'Sending…';
+
+            // Simulate a 1-second network delay, then show success
+            setTimeout(() => {
+                feedback.style.display  = 'block';
+                feedback.className      = 'alert';
+                // Custom inline styles to match the dark theme (overriding Bootstrap's alert defaults)
+                feedback.style.background = 'rgba(255,255,255,0.1)';
+                feedback.style.border     = '1px solid rgba(255,255,255,0.3)';
+                feedback.style.color      = '#f0ece3';
+                // Personalise the message using the name they entered
+                feedback.textContent = `Thanks, ${name}! Your message has been received. I'll get back to you soon.`;
+
+                btn.textContent = 'Message Sent ✓';
+
+                // Reset all form fields back to their default empty state
+                document.getElementById('contact-form').reset();
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>

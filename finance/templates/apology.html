@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col-sm-8 col-md-5 text-center">
+        <h2 class="mb-1">{{ top }}</h2>
+        <img alt="{{ top }}: {{ bottom }}"
+            class="img-fluid rounded my-3"
+            src="https://memegen.link/fry/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg">
+        <p class="text-muted">{{ bottom }}</p>
+        <a href="/" class="btn btn-primary">Go Home</a>
+    </div>
+</div>
+{% endblock %}

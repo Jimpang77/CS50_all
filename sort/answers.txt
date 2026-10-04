@@ -1,0 +1,11 @@
+sort1 uses: Bubble Sort
+
+How do you know?: when compared to the other one remaining after figuring out which one was merge sort It was found that when everything was already sorted it was faster than sort3
+
+sort2 uses: Merge Sort
+
+How do you know?: When run, compared to the others it was the fastest one by a lot.
+
+sort3 uses: Selection Sort
+
+How do you know?: It was the slowest sort compared to all of the other algorithms

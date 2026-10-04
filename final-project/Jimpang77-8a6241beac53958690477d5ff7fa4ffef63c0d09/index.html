@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apocalypse Survivor: The Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="level-up-screen" class="screen hidden">
+            <h2>LEVEL UP!</h2>
+            <p>Choose an Upgrade:</p>
+            <div class="card-container">
+                <div class="card" id="option1">
+                    <h3 id="option1-title">Upgrade 1</h3>
+                    <p id="option1-desc">Description</p>
+                </div>
+                <div class="card" id="option2">
+                    <h3 id="option2-title">Upgrade 2</h3>
+                    <p id="option2-desc">Description</p>
+                </div>
+                <div class="card" id="option3">
+                    <h3 id="option3-title">Upgrade 3</h3>
+                    <p id="option3-desc">Description</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="screen hidden">
+            <h1 class="death-text">MISSION FAILED</h1>
+            <p id="final-stats">You reached Stage 1, Wave 3</p>
+            <button onclick="location.reload()">TRY AGAIN</button>
+        </div>
+
+        <div id="victory-screen" class="screen hidden">
+            <h1 class="victory-text">CONGRATULATIONS</h1>
+            <p class="victory-subtext">You survived the Apocalypse.</p>
+            <button onclick="location.reload()">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
